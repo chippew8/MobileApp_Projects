@@ -48,7 +48,8 @@
             android:id="@+id/englishCheck"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/english"/>
+            android:text="@string/english"
+            android:checked="true"/>
         <RadioButton
             android:id="@+id/chineseCheck"
             android:layout_width="wrap_content"
@@ -97,14 +98,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            android:text="@string/violence" />
+            android:text="@string/violence"
+            android:visibility="gone"
+            />
 
         <CheckBox
             android:id="@+id/LanguageCheck"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            android:text="@string/language_used"/>
+            android:text="@string/language_used"
+            android:visibility="gone"/>
 
     </LinearLayout>
 
