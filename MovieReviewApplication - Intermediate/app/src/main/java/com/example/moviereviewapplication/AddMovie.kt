@@ -2,25 +2,28 @@ package com.example.moviereviewapplication
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
+import android.content.Intent
 import android.view.View
 import android.widget.RadioGroup
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_add_movie.*
+import kotlinx.android.synthetic.main.activity_movie_detail.*
 
 class AddMovie : AppCompatActivity() {
     var movieName: String = ""
     var movieDesc: String = ""
-    var movieLang: String = ""
+    var movieLang: String = "English"
     var movieRelease: String = ""
-    var notsuitable: String = "\nNot suitable for all ages = "
-    var reason: String = "\nReason: "
+    var notsuitable: String = ""
 
     fun nameCheck(): Boolean {
         if (NameInput.text.toString().isEmpty() == true){
             NameInput.setError("Name cannot be empty")
             return false
         }else{
-            movieName = "Title: " + NameInput.text.toString()
+            movieName = NameInput.text.toString()
             return true
         }
     }
@@ -29,7 +32,7 @@ class AddMovie : AppCompatActivity() {
             DescriptionInput.setError("Description cannot be empty")
             return false
         }else{
-            movieDesc = "\nOverview: " +DescriptionInput.text.toString()
+            movieDesc = DescriptionInput.text.toString()
             return true
         }
     }
@@ -38,7 +41,7 @@ class AddMovie : AppCompatActivity() {
             ReleaseDateInput.setError("Release date cannot be empty")
             return false
         }else{
-            movieRelease ="\nRelease Date: " + ReleaseDateInput.text.toString()
+            movieRelease = ReleaseDateInput.text.toString()
             return true
         }
     }
@@ -49,13 +52,13 @@ class AddMovie : AppCompatActivity() {
 
             override fun onCheckedChanged(p0: RadioGroup?, p1: Int) {
                 if (p1 == R.id.englishCheck) {
-                    movieLang = "\nLanguage: English"
+                    movieLang = "English"
                 } else if (p1 == R.id.chineseCheck) {
-                    movieLang = "\nLanguage: Chinese"
+                    movieLang = "Chinese"
                 } else if (p1 == R.id.malayCheck) {
-                    movieLang = "\nLanguage: Malay"
+                    movieLang = "Malay"
                 } else if (p1 == R.id.indianCheck) {
-                    movieLang = "\nLanguage: Indian"
+                    movieLang = "Indian"
                 }
 
             }
@@ -66,35 +69,57 @@ class AddMovie : AppCompatActivity() {
             if (chkUnsuitable.isChecked == true) {
                 ViolenceCheck.setVisibility(View.VISIBLE)
                 LanguageCheck.setVisibility(View.VISIBLE)
-                notsuitable += "true"
+                notsuitable = "Yes"
+                if (notsuitable == "Yes"){
+                    LanguageCheck.setOnClickListener {
 
-                LanguageCheck.setOnClickListener {
-                    if (LanguageCheck.isChecked == true) {
-                        reason += "\n Language"
+                    }
+                    ViolenceCheck.setOnClickListener {
+
+                    }
+                    if (LanguageCheck.isChecked == true && ViolenceCheck.isChecked == true){
+                        notsuitable = "No (Language & Violence)"
+                    }else if (LanguageCheck.isChecked == true && ViolenceCheck.isChecked == false){
+                        notsuitable = "No (Language)"
+                    }else if (ViolenceCheck.isChecked == true && LanguageCheck.isChecked == false){
+                        notsuitable = "No (Violence)"
                     }
                 }
-                ViolenceCheck.setOnClickListener {
-                    if (ViolenceCheck.isChecked == true) {
-                        reason += "\n Violence"
-                    }
-                }
+
+
             } else if (chkUnsuitable.isChecked == false) {
                 ViolenceCheck.setVisibility(View.GONE)
                 LanguageCheck.setVisibility(View.GONE)
-                notsuitable += "false"
+                notsuitable = "Yes"
             }
         }
 
 
 
-        btnSubmit.setOnClickListener {
-            if (nameCheck() && descCheck() && dateCheck()) {
-                var btnFeedback: String = ""
-                btnFeedback = movieName + movieDesc + movieRelease + movieLang + notsuitable + reason
-                displayToast(btnFeedback)
-            }
-        }
     }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.add,menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item?.itemId == R.id.addMovie){
+            if (nameCheck() && descCheck() && dateCheck()) {
+                var movieIntent = Intent(this, MovieDetail::class.java)
+                movieIntent.putExtra("titleVal", movieName)
+                movieIntent.putExtra("overviewVal", movieDesc)
+                movieIntent.putExtra("languageVal", movieLang)
+                movieIntent.putExtra("dateVal", movieRelease)
+                movieIntent.putExtra("suitableVal", notsuitable)
+                startActivity(movieIntent)
+            }
+        }else if(item?.itemId == R.id.clearEntry){
+
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
 
     fun displayToast(message: String){
         Toast.makeText(this, message, Toast.LENGTH_LONG).show()

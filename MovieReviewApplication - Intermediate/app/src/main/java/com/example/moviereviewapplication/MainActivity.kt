@@ -21,8 +21,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.addMovie){
-            var addMovieIntent = Intent(this, AddMovie::class.java)
-            startActivity(addMovieIntent)
+            var MainPage = Intent(this, AddMovie::class.java)
+            startActivity(MainPage)
         }
         return super.onOptionsItemSelected(item)
     }
