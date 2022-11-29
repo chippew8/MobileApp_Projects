@@ -19,3 +19,4 @@ class MovieDetail : AppCompatActivity() {
         findViewById<TextView>(R.id.suitableVal).text = m.suitable
     }
 }
+
