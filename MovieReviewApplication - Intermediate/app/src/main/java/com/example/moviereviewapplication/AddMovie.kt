@@ -18,7 +18,8 @@ class AddMovie : AppCompatActivity() {
     var movieLang: String = "English"
     var movieRelease: String = ""
     var notsuitable: String = ""
-
+    var violence: String = ""
+    var language: String = ""
 
     fun nameCheck(): Boolean {
         if (NameInput.text.toString().isEmpty() == true){
@@ -50,8 +51,10 @@ class AddMovie : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_movie)
-        languagePick.setOnCheckedChangeListener(object : RadioGroup.OnCheckedChangeListener {
 
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        languagePick.setOnCheckedChangeListener(object : RadioGroup.OnCheckedChangeListener {
             override fun onCheckedChanged(p0: RadioGroup?, p1: Int) {
                 if (p1 == R.id.englishCheck) {
                     movieLang = "English"
@@ -66,35 +69,46 @@ class AddMovie : AppCompatActivity() {
             }
         })
 
-
-        chkUnsuitable.setOnClickListener {
-            if (chkUnsuitable.isChecked == true) {
-                ViolenceCheck.setVisibility(View.VISIBLE)
-                LanguageCheck.setVisibility(View.VISIBLE)
-                notsuitable = "Yes"
-                if (notsuitable == "Yes"){
-                    LanguageCheck.setOnClickListener {
-
-                    }
-                    ViolenceCheck.setOnClickListener {
-
-                    }
-                    if (LanguageCheck.isChecked == true && ViolenceCheck.isChecked == true){
-                        notsuitable = "No (Language & Violence)"
-                    }else if (LanguageCheck.isChecked == true && ViolenceCheck.isChecked == false){
-                        notsuitable = "No (Language)"
-                    }else if (ViolenceCheck.isChecked == true && LanguageCheck.isChecked == false){
-                        notsuitable = "No (Violence)"
-                    }
-                }
-
-
-            } else if (chkUnsuitable.isChecked == false) {
-                ViolenceCheck.setVisibility(View.GONE)
-                LanguageCheck.setVisibility(View.GONE)
-                notsuitable = "Yes"
-            }
+        if(chkUnsuitable.isChecked == true){
+            ViolenceCheck.setVisibility(View.VISIBLE)
+            LanguageCheck.setVisibility(View.VISIBLE)
+        }else{
+            ViolenceCheck.setVisibility(View.GONE)
+            LanguageCheck.setVisibility(View.GONE)
         }
+
+//        chkUnsuitable.setOnClickListener{
+//            if (chkUnsuitable.isChecked == true) {
+//
+//                ViolenceCheck.setVisibility(View.VISIBLE)
+//                LanguageCheck.setVisibility(View.VISIBLE)
+//                notsuitable = "No"
+//                if (notsuitable == "No"){
+//                    if (LanguageCheck.isChecked == true){
+//                        BadLanguage = true
+//                    }else {
+//                        BadLanguage = false
+//                    }
+//                    if (ViolenceCheck.isChecked == true){
+//                        BadViolence = true
+//                    }else{
+//                        BadViolence = false
+//                    }
+//
+//                    if (LanguageCheck == true && BadViolence == true){
+//                        notsuitable = "No (Language & Violence)"
+//                    }else if (BadLanguage == true && BadViolence == false){
+//                        notsuitable = "No (Language)"
+//                    }else if (BadViolence == true && BadLanguage == false){
+//                        notsuitable = "No (Violence)"
+//                    }
+//                }
+//            }else if (chkUnsuitable.isChecked == false) {
+//                ViolenceCheck.setVisibility(View.GONE)
+//                LanguageCheck.setVisibility(View.GONE)
+//                notsuitable = "Yes"
+//            }
+//        }
 
 
 
@@ -130,6 +144,10 @@ class AddMovie : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
+    }
 
     fun displayToast(message: String){
         Toast.makeText(this, message, Toast.LENGTH_LONG).show()

@@ -17,6 +17,7 @@ class MovieDetail : AppCompatActivity() {
         setContentView(R.layout.activity_movie_detail)
         registerForContextMenu(reviewVal)
 
+
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
 
@@ -57,6 +58,11 @@ class MovieDetail : AppCompatActivity() {
 
         }
         return super.onContextItemSelected(item)
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 }
 
