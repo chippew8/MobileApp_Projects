@@ -39,7 +39,7 @@
         android:text="Reviews:" />
     <TextView
         android:id="@+id/reviewVal"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="20sp"
         android:text="No Reviews yet. \nLong press here to add your review."/>

@@ -1,0 +1,10 @@
+#Tue Nov 15 00:58:42 SGT 2022
+base.2=C\:\\School_Work\\MobileApp_Projects\\MovieReviewApplication\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\4\\classes.dex
+path.2=4/classes.dex
+base.1=C\:\\School_Work\\MobileApp_Projects\\MovieReviewApplication\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex
+path.1=0/classes.dex
+base.0=C\:\\School_Work\\MobileApp_Projects\\MovieReviewApplication\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
+renamed.2=classes3.dex
+renamed.1=classes2.dex
+renamed.0=classes.dex
+path.0=classes.dex

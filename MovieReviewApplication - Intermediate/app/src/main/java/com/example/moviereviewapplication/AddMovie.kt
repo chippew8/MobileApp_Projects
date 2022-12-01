@@ -11,12 +11,14 @@ import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_add_movie.*
 import kotlinx.android.synthetic.main.activity_movie_detail.*
 
+
 class AddMovie : AppCompatActivity() {
     var movieName: String = ""
     var movieDesc: String = ""
     var movieLang: String = "English"
     var movieRelease: String = ""
     var notsuitable: String = ""
+
 
     fun nameCheck(): Boolean {
         if (NameInput.text.toString().isEmpty() == true){
@@ -96,6 +98,7 @@ class AddMovie : AppCompatActivity() {
 
 
 
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -115,7 +118,14 @@ class AddMovie : AppCompatActivity() {
                 startActivity(movieIntent)
             }
         }else if(item?.itemId == R.id.clearEntry){
-
+            NameInput.setText(" ")
+            DescriptionInput.setText(" ")
+            ReleaseDateInput.setText(" ")
+            ViolenceCheck.setChecked(false)
+            LanguageCheck.setChecked(false)
+            chkUnsuitable.setChecked(false)
+            ViolenceCheck.setVisibility(View.GONE)
+            LanguageCheck.setVisibility(View.GONE)
         }
         return super.onOptionsItemSelected(item)
     }
