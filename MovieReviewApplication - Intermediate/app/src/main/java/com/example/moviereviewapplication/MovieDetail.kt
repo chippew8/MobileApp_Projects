@@ -7,6 +7,7 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
 import android.content.Intent
+
 import kotlinx.android.synthetic.main.activity_movie_detail.*
 
 
@@ -14,10 +15,10 @@ class MovieDetail : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_movie_detail)
-
         registerForContextMenu(reviewVal)
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
 
         var intent = intent
         var titleVal = intent.getStringExtra("titleVal")
@@ -26,7 +27,7 @@ class MovieDetail : AppCompatActivity() {
         var dateVal = intent.getStringExtra("dateVal")
         var suitableVal = intent.getStringExtra("suitableVal")
 
-        var m = MovieClass(titleVal.toString(), overviewVal.toString(), languageVal.toString(),dateVal.toString(), suitableVal.toString())
+        var m = MovieClass(titleVal.toString(), overviewVal.toString(), languageVal.toString(),dateVal.toString(), suitableVal.toString(), null, null)
 
         findViewById<TextView>(R.id.titleVal).text = m.name
         findViewById<TextView>(R.id.overviewVal).text = m.desc
@@ -36,12 +37,14 @@ class MovieDetail : AppCompatActivity() {
 
 
     }
+
     override fun onCreateContextMenu(
         menu: ContextMenu?,
         v: View?,
         menuInfo: ContextMenu.ContextMenuInfo?
     ){
         super.onCreateContextMenu(menu, v, menuInfo)
+
         if (v?.id == R.id.reviewVal){
             menu?.add(1, 1001, 1, "Add review")
         }
@@ -49,6 +52,7 @@ class MovieDetail : AppCompatActivity() {
     }
 
     override fun onContextItemSelected(item: MenuItem):Boolean{
+
         if (item.itemId == 1001){
 
         }
