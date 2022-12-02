@@ -9,7 +9,7 @@ class RatingActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_rating)
 
-        var m = MovieClass("Venom", "When Eddie Brock acquires the powers of a symbiote, he will have to release his alter-ego Venom to save his life", "English","03-10-2018", "Yes", null , null)
+        var m = MovieClass("Venom", "When Eddie Brock acquires the powers of a symbiote, he will have to release his alter-ego Venom to save his life", "English","03-10-2018", "Yes", null , )
 
         findViewById<TextView>(R.id.movieRate).text = "Enter your review for the movie: " + m.name
     }

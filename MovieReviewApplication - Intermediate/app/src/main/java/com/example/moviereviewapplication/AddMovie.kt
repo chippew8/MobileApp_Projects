@@ -17,36 +17,36 @@ class AddMovie : AppCompatActivity() {
     var movieDesc: String = ""
     var movieLang: String = "English"
     var movieRelease: String = ""
-    var notsuitable: String = ""
-    var violence: String = ""
-    var language: String = ""
+    var language : String = ""
+    var violence : String = ""
 
-    fun nameCheck(): Boolean {
+
+    fun ErrorValidation(): Boolean {
+        var count : Int = 0
         if (NameInput.text.toString().isEmpty() == true){
-            NameInput.setError("Name cannot be empty")
-            return false
+            NameInput.error = "Name cannot be empty"
+
         }else{
+            count += 1
             movieName = NameInput.text.toString()
-            return true
+
         }
-    }
-    fun descCheck(): Boolean {
         if (DescriptionInput.text.toString().isEmpty() == true){
-            DescriptionInput.setError("Description cannot be empty")
-            return false
+            DescriptionInput.error = "Description cannot be empty"
         }else{
+            count += 1
             movieDesc = DescriptionInput.text.toString()
-            return true
+
         }
-    }
-    fun dateCheck(): Boolean {
         if (ReleaseDateInput.text.toString().isEmpty() == true){
-            ReleaseDateInput.setError("Release date cannot be empty")
-            return false
+            ReleaseDateInput.error = "Release Date cannot be empty"
         }else{
+            count += 1
             movieRelease = ReleaseDateInput.text.toString()
-            return true
+
         }
+
+        return (count == 3)
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,14 +68,27 @@ class AddMovie : AppCompatActivity() {
 
             }
         })
+        chkUnsuitable.setOnClickListener {
+            if (chkUnsuitable.isChecked == true) {
+                ViolenceCheck.setVisibility(View.VISIBLE)
+                LanguageCheck.setVisibility(View.VISIBLE)
+                ViolenceCheck.setOnClickListener {
+                    if (ViolenceCheck.isChecked){
+                        violence = "True"
+                    }
+                }
+                LanguageCheck.setOnClickListener {
+                    if (LanguageCheck.isChecked) {
+                        language = "True"
+                    }
+                }
+            } else {
+                ViolenceCheck.setVisibility(View.GONE)
+                LanguageCheck.setVisibility(View.GONE)
 
-        if(chkUnsuitable.isChecked == true){
-            ViolenceCheck.setVisibility(View.VISIBLE)
-            LanguageCheck.setVisibility(View.VISIBLE)
-        }else{
-            ViolenceCheck.setVisibility(View.GONE)
-            LanguageCheck.setVisibility(View.GONE)
+            }
         }
+
 
 //        chkUnsuitable.setOnClickListener{
 //            if (chkUnsuitable.isChecked == true) {
@@ -122,13 +135,15 @@ class AddMovie : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item?.itemId == R.id.addMovie){
-            if (nameCheck() && descCheck() && dateCheck()) {
+            if (ErrorValidation()) {
                 var movieIntent = Intent(this, MovieDetail::class.java)
                 movieIntent.putExtra("titleVal", movieName)
                 movieIntent.putExtra("overviewVal", movieDesc)
                 movieIntent.putExtra("languageVal", movieLang)
                 movieIntent.putExtra("dateVal", movieRelease)
-                movieIntent.putExtra("suitableVal", notsuitable)
+                movieIntent.putExtra("violence", violence)
+                movieIntent.putExtra("language", language)
+
                 startActivity(movieIntent)
             }
         }else if(item?.itemId == R.id.clearEntry){
@@ -149,7 +164,5 @@ class AddMovie : AppCompatActivity() {
         return true
     }
 
-    fun displayToast(message: String){
-        Toast.makeText(this, message, Toast.LENGTH_LONG).show()
-    }
+
 }
