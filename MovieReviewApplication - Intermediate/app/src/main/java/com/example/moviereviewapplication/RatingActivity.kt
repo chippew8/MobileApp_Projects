@@ -15,7 +15,6 @@ class RatingActivity : AppCompatActivity() {
 
         var intent = intent
         var titleVal = intent.getStringExtra("titleVal")
-        var rating : Float = movieRateIn.rating.toFloat()
         var movieName : String = titleVal.toString()
         findViewById<TextView>(R.id.movieRate).text = "Enter your review for the movie: " + movieName
     }
@@ -25,9 +24,10 @@ class RatingActivity : AppCompatActivity() {
         return super.onCreateOptionsMenu(menu)
     }
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        var rating : Float = movieRateIn.rating.toFloat()
         if (item.itemId == R.id.addMovie){
             var Rating = Intent(this, MovieDetail::class.java)
-//            Rating.putExtra()
+            Rating.putExtra("rating", rating)
             startActivity(Rating)
         }
         return super.onOptionsItemSelected(item)

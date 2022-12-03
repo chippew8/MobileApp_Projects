@@ -26,26 +26,27 @@ class MovieDetail : AppCompatActivity() {
         var dateVal = intent.getStringExtra("dateVal")
         var violence = intent.getStringExtra("violence")
         var language = intent.getStringExtra("language")
-        var suitability : String = ""
-//        var rating = intent.getFloatExtra("rating")
+        var suitable = intent.getStringExtra("suitable")
+        var rating = intent.getStringExtra("rating")
 
-        if (violence == "True" && language == "True") {
-            suitability = "No (Language & Violence)"
-        }else if(violence == "True" && language != "True"){
-            suitability = "No(Violence)"
-        }else if(language == "True" && violence != "True"){
-            suitability = "No(Language)"
+        if (violence.toBoolean() == true && language.toBoolean() == true) {
+            suitable = "No (Language & Violence)"
+        }else if(violence.toBoolean() == true && language.toBoolean() == false){
+            suitable = "No(Violence)"
+        }else if(language.toBoolean() == true && violence.toBoolean() == false){
+            suitable = "No(Language)"
         }else{
-            suitability = "Yes"
+            suitable = "Yes"
         }
-        var m = MovieClass(titleVal.toString(), overviewVal.toString(), languageVal.toString(),dateVal.toString(), suitability,null)
+        var m = MovieClass(titleVal.toString(), overviewVal.toString(), languageVal.toString(), dateVal.toString(), suitable.toString(), violence.toBoolean(), language.toBoolean(), rating?.toFloat()
+        )
 
         findViewById<TextView>(R.id.titleVal).text = m.name
         findViewById<TextView>(R.id.overviewVal).text = m.desc
         findViewById<TextView>(R.id.languageVal).text = m.language
         findViewById<TextView>(R.id.dateVal).text = m.releaseDate
         findViewById<TextView>(R.id.suitableVal).text = m.suitable
-
+        
     }
 
     override fun onCreateContextMenu(

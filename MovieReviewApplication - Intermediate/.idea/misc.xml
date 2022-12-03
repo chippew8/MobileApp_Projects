@@ -4,11 +4,13 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/School_Work/MobileApp_Projects/MovieReviewApplication - Intermediate/app/src/main/res/layout/activity_add_movie.xml" value="0.264" />
+        <entry key="..\:/School_Work/MobileApp_Projects/MovieReviewApplication - Intermediate/app/src/main/res/layout/activity_edit_movie.xml" value="0.38697916666666665" />
         <entry key="..\:/School_Work/MobileApp_Projects/MovieReviewApplication - Intermediate/app/src/main/res/layout/activity_main.xml" value="0.16" />
         <entry key="..\:/School_Work/MobileApp_Projects/MovieReviewApplication - Intermediate/app/src/main/res/layout/activity_movie_detail.xml" value="0.27447916666666666" />
         <entry key="..\:/School_Work/MobileApp_Projects/MovieReviewApplication - Intermediate/app/src/main/res/layout/activity_rating.xml" value="0.1" />
         <entry key="..\:/School_Work/MobileApp_Projects/MovieReviewApplication - Intermediate/app/src/main/res/menu/add.xml" value="0.264" />
         <entry key="..\:/School_Work/MobileApp_Projects/MovieReviewApplication - Intermediate/app/src/main/res/menu/details.xml" value="0.2734375" />
+        <entry key="..\:/School_Work/MobileApp_Projects/MovieReviewApplication - Intermediate/app/src/main/res/menu/edit.xml" value="0.38697916666666665" />
         <entry key="..\:/School_Work/MobileApp_Projects/MovieReviewApplication - Intermediate/app/src/main/res/menu/main.xml" value="0.205078125" />
         <entry key="..\:/School_Work/MobileApp_Projects/MovieReviewApplication - Intermediate/app/src/main/res/menu/rate.xml" value="0.13796296296296295" />
         <entry key="..\:/School_Work/MobileApp_Projects/MovieReviewApplication/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />

@@ -13,12 +13,13 @@ import kotlinx.android.synthetic.main.activity_movie_detail.*
 
 
 class AddMovie : AppCompatActivity() {
-    var movieName: String = ""
-    var movieDesc: String = ""
-    var movieLang: String = "English"
-    var movieRelease: String = ""
-    var language : String = ""
-    var violence : String = ""
+    var movieName : String = ""
+    var movieDesc : String = ""
+    var movieLang : String = "English"
+    var movieRelease : String = ""
+    var suitable : String = ""
+    var reason1 : Boolean = false
+    var reason2 : Boolean = false
 
 
     fun ErrorValidation(): Boolean {
@@ -72,60 +73,28 @@ class AddMovie : AppCompatActivity() {
             if (chkUnsuitable.isChecked == true) {
                 ViolenceCheck.setVisibility(View.VISIBLE)
                 LanguageCheck.setVisibility(View.VISIBLE)
-                ViolenceCheck.setOnClickListener {
-                    if (ViolenceCheck.isChecked){
-                        violence = "True"
-                    }
-                }
-                LanguageCheck.setOnClickListener {
-                    if (LanguageCheck.isChecked) {
-                        language = "True"
-                    }
-                }
-            } else {
+                suitable = "No"
+            }else{
                 ViolenceCheck.setVisibility(View.GONE)
                 LanguageCheck.setVisibility(View.GONE)
-
+                suitable = "Yes"
             }
         }
 
-
-//        chkUnsuitable.setOnClickListener{
-//            if (chkUnsuitable.isChecked == true) {
-//
-//                ViolenceCheck.setVisibility(View.VISIBLE)
-//                LanguageCheck.setVisibility(View.VISIBLE)
-//                notsuitable = "No"
-//                if (notsuitable == "No"){
-//                    if (LanguageCheck.isChecked == true){
-//                        BadLanguage = true
-//                    }else {
-//                        BadLanguage = false
-//                    }
-//                    if (ViolenceCheck.isChecked == true){
-//                        BadViolence = true
-//                    }else{
-//                        BadViolence = false
-//                    }
-//
-//                    if (LanguageCheck == true && BadViolence == true){
-//                        notsuitable = "No (Language & Violence)"
-//                    }else if (BadLanguage == true && BadViolence == false){
-//                        notsuitable = "No (Language)"
-//                    }else if (BadViolence == true && BadLanguage == false){
-//                        notsuitable = "No (Violence)"
-//                    }
-//                }
-//            }else if (chkUnsuitable.isChecked == false) {
-//                ViolenceCheck.setVisibility(View.GONE)
-//                LanguageCheck.setVisibility(View.GONE)
-//                notsuitable = "Yes"
-//            }
-//        }
-
-
-
-
+        ViolenceCheck.setOnClickListener {
+            if (ViolenceCheck.isChecked){
+                reason1 = true
+            }else{
+                reason1 = false
+            }
+        }
+        LanguageCheck.setOnClickListener {
+            if (LanguageCheck.isChecked) {
+                reason2 = true
+            }else{
+                reason2 = false
+            }
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -141,8 +110,9 @@ class AddMovie : AppCompatActivity() {
                 movieIntent.putExtra("overviewVal", movieDesc)
                 movieIntent.putExtra("languageVal", movieLang)
                 movieIntent.putExtra("dateVal", movieRelease)
-                movieIntent.putExtra("violence", violence)
-                movieIntent.putExtra("language", language)
+                movieIntent.putExtra("suitable", suitable)
+                movieIntent.putExtra("violence", reason1)
+                movieIntent.putExtra("language", reason2)
 
                 startActivity(movieIntent)
             }
