@@ -1,16 +1,35 @@
 package com.example.moviereviewapplication
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.TextView
+import kotlinx.android.synthetic.main.activity_rating.*
 
 class RatingActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_rating)
 
-        var m = MovieClass("Venom", "When Eddie Brock acquires the powers of a symbiote, he will have to release his alter-ego Venom to save his life", "English","03-10-2018", "Yes", null , )
+        var intent = intent
+        var titleVal = intent.getStringExtra("titleVal")
+        var rating : Float = movieRateIn.rating.toFloat()
+        var movieName : String = titleVal.toString()
+        findViewById<TextView>(R.id.movieRate).text = "Enter your review for the movie: " + movieName
+    }
 
-        findViewById<TextView>(R.id.movieRate).text = "Enter your review for the movie: " + m.name
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.rate,menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.addMovie){
+            var Rating = Intent(this, MovieDetail::class.java)
+//            Rating.putExtra()
+            startActivity(Rating)
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

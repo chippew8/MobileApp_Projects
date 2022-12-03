@@ -27,6 +27,7 @@ class MovieDetail : AppCompatActivity() {
         var violence = intent.getStringExtra("violence")
         var language = intent.getStringExtra("language")
         var suitability : String = ""
+//        var rating = intent.getFloatExtra("rating")
 
         if (violence == "True" && language == "True") {
             suitability = "No (Language & Violence)"
@@ -63,7 +64,9 @@ class MovieDetail : AppCompatActivity() {
     override fun onContextItemSelected(item: MenuItem):Boolean{
 
         if (item.itemId == 1001){
-
+            var movieIntent = Intent(this, RatingActivity::class.java)
+            movieIntent.putExtra("titleVal", findViewById<TextView>(R.id.titleVal).text)
+            startActivity(movieIntent)
         }
         return super.onContextItemSelected(item)
     }
