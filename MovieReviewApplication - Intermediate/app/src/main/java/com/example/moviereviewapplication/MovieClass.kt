@@ -1,6 +1,18 @@
 package com.example.moviereviewapplication
 
-class MovieClass(var name: String, var desc: String, var language: String, var releaseDate: String,var suitable: String, var reason1: Boolean, var reason2: Boolean, var review: Float?) {
+import java.io.Serializable
+
+
+class MovieClass (var name :Serializable,
+                  var desc: Serializable,
+                  var language: Serializable,
+                  var releaseDate: Serializable,
+                  var suitable: Serializable,
+                  var reason1: Serializable,
+                  var reason2: Serializable,
+                  var rating: Serializable?,
+                  var review: Serializable?) :Serializable
+{
     init {
         this.name = name;
         this.desc = desc;
@@ -9,6 +21,7 @@ class MovieClass(var name: String, var desc: String, var language: String, var r
         this.suitable = suitable;
         this.reason1 = reason1;
         this.reason2 = reason2;
+        this.rating = rating;
         this.review = review;
     }
 }

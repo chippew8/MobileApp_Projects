@@ -17,57 +17,74 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Title:"/>
+
     <TextView
         android:id="@+id/titleVal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20sp"/>
+
     <TextView
         android:id="@+id/Overview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Overview:"/>
+
     <TextView
         android:id="@+id/overviewVal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20sp"/>
+
     <TextView
         android:id="@+id/Review"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Reviews:" />
+        android:text="Reviews:"/>
+
+    <RatingBar
+        android:id="@+id/ratingVal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
+
     <TextView
         android:id="@+id/reviewVal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="20sp"
         android:text="No Reviews yet. \nLong press here to add your review."/>
+
     <TextView
         android:id="@+id/Language"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Language:"/>
+
     <TextView
         android:id="@+id/languageVal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20sp"/>
+
     <TextView
         android:id="@+id/Date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Release date:"/>
+
     <TextView
         android:id="@+id/dateVal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20sp"/>
+
     <TextView
         android:id="@+id/Suitable"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Suitable for children below 13: "/>
+
     <TextView
         android:id="@+id/suitableVal"
         android:layout_width="wrap_content"

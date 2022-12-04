@@ -41,24 +41,25 @@ class EditMovieActivity : AppCompatActivity() {
                 desc = "When Eddie Brock acquires the powers of a symbiote, he will have to release his alter-ego Venom to save his life",
                 language = "English",
                 review = null,
+                rating = null,
                 releaseDate = "19-10-2018",
                 suitable = "Yes",
                 reason1 = false,
                 reason2 = false,
             )
 
-        NameInput1.setText(movie.name)
-        DescriptionInput1.setText(movie.desc)
+        NameInput1.setText(movie.name.toString())
+        DescriptionInput1.setText(movie.desc.toString())
         when (movie.language) {
             "English" -> englishCheck1.isChecked = true
             "Chinese" -> chineseCheck1.isChecked = true
             "Malay" -> malayCheck1.isChecked = true
             "Tamil" -> indianCheck1.isChecked = true
         }
-        ReleaseDateInput1.setText(movie.releaseDate)
+        ReleaseDateInput1.setText(movie.releaseDate.toString())
         chkUnsuitable1.isChecked = movie.suitable != "Yes"
-        ViolenceCheck1.isChecked = movie.reason1
-        LanguageCheck1.isChecked = movie.reason2
+        ViolenceCheck1.isChecked = movie.reason1.toString() == "true"
+        LanguageCheck1.isChecked = movie.reason2.toString() == "true"
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

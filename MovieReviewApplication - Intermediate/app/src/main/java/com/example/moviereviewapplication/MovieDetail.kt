@@ -7,46 +7,47 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
 import android.content.Intent
+import android.graphics.Movie
 
 import kotlinx.android.synthetic.main.activity_movie_detail.*
 
 
 class MovieDetail : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_movie_detail)
         registerForContextMenu(reviewVal)
 
+
+
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
         var intent = intent
-        var titleVal = intent.getStringExtra("titleVal")
-        var overviewVal = intent.getStringExtra("overviewVal")
-        var languageVal = intent.getStringExtra("languageVal")
-        var dateVal = intent.getStringExtra("dateVal")
-        var violence = intent.getStringExtra("violence")
-        var language = intent.getStringExtra("language")
-        var suitable = intent.getStringExtra("suitable")
-        var rating = intent.getStringExtra("rating")
+        var movie = intent.getSerializableExtra("movie") as? MovieClass
+        var rating = intent.getStringExtra("starRating")
+        var review = intent.getStringExtra("reviewInput")
 
-        if (violence.toBoolean() == true && language.toBoolean() == true) {
-            suitable = "No (Language & Violence)"
-        }else if(violence.toBoolean() == true && language.toBoolean() == false){
-            suitable = "No(Violence)"
-        }else if(language.toBoolean() == true && violence.toBoolean() == false){
-            suitable = "No(Language)"
-        }else{
-            suitable = "Yes"
+
+        movie?.review = review
+
+        if (rating != null){
+            movie?.rating = rating?.toFloat()
+            ratingVal.setVisibility(View.VISIBLE)
+            ratingVal.rating = movie?.rating.toString().toFloat()
+            ratingVal.setEnabled(false)
         }
-        var m = MovieClass(titleVal.toString(), overviewVal.toString(), languageVal.toString(), dateVal.toString(), suitable.toString(), violence.toBoolean(), language.toBoolean(), rating?.toFloat()
-        )
+        if (review != null){
+            reviewVal.text = review
+        }
 
-        findViewById<TextView>(R.id.titleVal).text = m.name
-        findViewById<TextView>(R.id.overviewVal).text = m.desc
-        findViewById<TextView>(R.id.languageVal).text = m.language
-        findViewById<TextView>(R.id.dateVal).text = m.releaseDate
-        findViewById<TextView>(R.id.suitableVal).text = m.suitable
-        
+        findViewById<TextView>(R.id.titleVal).text = movie?.name.toString()
+        findViewById<TextView>(R.id.overviewVal).text = movie?.desc.toString()
+        findViewById<TextView>(R.id.languageVal).text = movie?.language.toString()
+        findViewById<TextView>(R.id.dateVal).text = movie?.releaseDate.toString()
+        findViewById<TextView>(R.id.suitableVal).text = movie?.suitable.toString()
+
+
+
     }
 
     override fun onCreateContextMenu(
@@ -66,7 +67,8 @@ class MovieDetail : AppCompatActivity() {
 
         if (item.itemId == 1001){
             var movieIntent = Intent(this, RatingActivity::class.java)
-            movieIntent.putExtra("titleVal", findViewById<TextView>(R.id.titleVal).text)
+            val movie = intent.getSerializableExtra("movie") as? MovieClass
+            movieIntent.putExtra("movie", movie)
             startActivity(movieIntent)
         }
         return super.onContextItemSelected(item)

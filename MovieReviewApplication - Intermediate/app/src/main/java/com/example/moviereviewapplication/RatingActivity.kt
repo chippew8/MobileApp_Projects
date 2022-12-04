@@ -9,27 +9,33 @@ import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_rating.*
 
 class RatingActivity : AppCompatActivity() {
+    var StarRating : String = ""
+    var reviewInput : String = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_rating)
 
-        var intent = intent
-        var titleVal = intent.getStringExtra("titleVal")
-        var movieName : String = titleVal.toString()
-        findViewById<TextView>(R.id.movieRate).text = "Enter your review for the movie: " + movieName
-    }
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.rate,menu)
-        return super.onCreateOptionsMenu(menu)
-    }
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        var rating : Float = movieRateIn.rating.toFloat()
-        if (item.itemId == R.id.addMovie){
-            var Rating = Intent(this, MovieDetail::class.java)
-            Rating.putExtra("rating", rating)
-            startActivity(Rating)
+        var intent = intent
+        var movie = intent.getSerializableExtra("movie") as? MovieClass
+
+
+        findViewById<TextView>(R.id.movieRate).text = "Enter your review for the movie: " + movie?.name.toString()
+
+        submit.setOnClickListener{
+            var StarRating = movieRateIn.rating.toString()
+            var reviewInput = movieViewIn.text.toString()
+            val ratingIntent = Intent(this, MovieDetail::class.java)
+            ratingIntent.putExtra("movie", movie)
+            ratingIntent.putExtra("starRating", StarRating)
+            ratingIntent.putExtra("reviewInput", reviewInput)
+            startActivity(ratingIntent)
         }
-        return super.onOptionsItemSelected(item)
+    }
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+
+        return true
     }
 }

@@ -73,28 +73,20 @@ class AddMovie : AppCompatActivity() {
             if (chkUnsuitable.isChecked == true) {
                 ViolenceCheck.setVisibility(View.VISIBLE)
                 LanguageCheck.setVisibility(View.VISIBLE)
-                suitable = "No"
             }else{
                 ViolenceCheck.setVisibility(View.GONE)
                 LanguageCheck.setVisibility(View.GONE)
-                suitable = "Yes"
             }
         }
 
         ViolenceCheck.setOnClickListener {
-            if (ViolenceCheck.isChecked){
-                reason1 = true
-            }else{
-                reason1 = false
-            }
+            reason1 = ViolenceCheck.isChecked
         }
         LanguageCheck.setOnClickListener {
-            if (LanguageCheck.isChecked) {
-                reason2 = true
-            }else{
-                reason2 = false
-            }
+            reason2 = LanguageCheck.isChecked
         }
+
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -105,15 +97,18 @@ class AddMovie : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item?.itemId == R.id.addMovie){
             if (ErrorValidation()) {
-                var movieIntent = Intent(this, MovieDetail::class.java)
-                movieIntent.putExtra("titleVal", movieName)
-                movieIntent.putExtra("overviewVal", movieDesc)
-                movieIntent.putExtra("languageVal", movieLang)
-                movieIntent.putExtra("dateVal", movieRelease)
-                movieIntent.putExtra("suitable", suitable)
-                movieIntent.putExtra("violence", reason1)
-                movieIntent.putExtra("language", reason2)
-
+                suitable = if (reason1 && reason2) {
+                    "No (Language & Violence)"
+                }else if(reason1 && !reason2){
+                    "No (Violence)"
+                }else if(reason2 && !reason1){
+                    "No (Language)"
+                }else{
+                    "Yes"
+                }
+                var m = MovieClass(movieName, movieDesc, movieLang, movieRelease, suitable, reason1, reason2, null, null)
+                val movieIntent = Intent(this, MovieDetail::class.java)
+                movieIntent.putExtra("movie", m)
                 startActivity(movieIntent)
             }
         }else if(item?.itemId == R.id.clearEntry){
